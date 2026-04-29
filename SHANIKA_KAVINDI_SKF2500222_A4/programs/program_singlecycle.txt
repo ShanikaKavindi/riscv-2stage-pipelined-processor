@@ -1,0 +1,16 @@
+0x00000013    addi x0, x0, 0               // Start NOP
+0x00C00093    addi x1, x0, 12 // x1 = n = 12
+0x08102023    sw   x1, 128(x0) // mem[0x80] = n (store)
+0x08002083    lw   x1, 128(x0) // x1 = mem[0x80] (load back)
+0x00000113    addi x2, x0, 0 // x2 = a = F0 = 0
+0x00100193    addi x3, x0, 1 // x3 = b = F1 = 1
+0x00200213    addi x4, x0, 2 // x4 = i = 2
+0x0040CC63    blt  x1, x4, 24 // if (n < i) goto done
+0x003102B3    add  x5, x2, x3 // x5 = a + b (tmp)
+0x00018113    addi x2, x3, 0 // a = b
+0x00028193    addi x3, x5, 0 // b = tmp
+0x00120213    addi x4, x4, 1 // i++
+0xFEDFF06F    jal  x0, -20 // goto loop
+0x00018513    addi x10, x3, 0 // a0 = b (F_n)
+0x00000013    addi x0, x0, 0               // padding / easier waveform
+0x0000006F    jal  x0, 0 // infinite loop
